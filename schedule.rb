@@ -3,7 +3,46 @@ publish =	false
 date	=	""	
 slug	=	""
 jkname	= 	""
+dirray  =   []
 # ================================
+
+
+# -----------------------------------
+# CLASS DEFINITION
+# -----------------------------------
+
+
+
+# -----------------------------------
+# READ CONFIG FILE
+# -----------------------------------
+
+configfile = ARGV.first
+config = File.read(configfile)
+config.split("\n").each do |line|
+	k,v=line.split(":")
+	# puts k, v
+	if k =~ /dir/
+		# .strip removes any extra space from the dir path
+		dirray.push(v.strip)
+	end
+end
+# puts dirray
+
+# -----------------------------------
+# LOOP THROUGH THE DIRECTORIES
+# -----------------------------------
+caz=''
+wdir=''
+dirray.each do |wdir|
+	puts '--------------------------------'
+	puts wdir
+	Dir.glob(wdir+"/*.md").each do |draft|
+		puts draft
+	end
+end
+
+exit
 
 
 filename = ARGV.first
